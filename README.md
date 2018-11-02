@@ -1,8 +1,8 @@
-# Toggl.com Bill Generator
+# Invoice Generator using Toggl.com API
 
 A script that will generate a PDF from Toggl.com API. Easy to automate from CRON or use from
 26 the Command Line Interface. Following Flask App Factory Pattern and 12 Factor App best practices. All configuration
-can be accomplished through Environment Varibles.
+can be accomplished through Environment Variables.
 
 Having a script to automate generation of bills helps reduce time and imporve
 efficiency in communication. Using this tool, you'll be able to send bills once
@@ -12,7 +12,7 @@ diligently throughout the month.
 ## Quickstart
 
 ```
-pip install toggl-bill-gen
+pip install toggl-api-bill-generator
 toggl-bill-gen -g
 source dev.sh
 toggl-bill-gen -o month
