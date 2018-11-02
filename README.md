@@ -1,7 +1,6 @@
 # Invoice Generator using Toggl.com API
 
-A script that will generate a PDF from Toggl.com API. Easy to automate from CRON or use from
-26 the Command Line Interface. Following Flask App Factory Pattern and 12 Factor App best practices. All configuration
+A script that will generate a PDF from Toggl.com API. Easy to automate from CRON or use from the Command Line Interface. Following Flask App Factory Pattern and 12 Factor App best practices. All configuration
 can be accomplished through Environment Variables.
 
 Having a script to automate generation of bills helps reduce time and imporve
