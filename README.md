@@ -12,10 +12,10 @@ diligently throughout the month.
 ## Quickstart
 
 ```
-pip install toggl-api-bill-generator
-toggl-bill-gen -g
+pip install toggl-invoice-generator
+toggl-invoice-generator -g
 source dev.sh
-toggl-bill-gen -o month
+toggl-invoice-generator -o month
 ```
 
 ## Functionality Breakdown
