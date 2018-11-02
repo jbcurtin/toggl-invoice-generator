@@ -185,7 +185,7 @@ if __name__ in ['__main__']:
   options = capture_options()
   if options.gen_envfile:
     from toggl_api_bill_generator import toggl_constants
-    output_path = os.path.join(os.getcwd(), 'env.sh')
+    output_path = os.path.join(os.getcwd(), 'dev.sh')
     with open(output_path, 'w') as stream:
       stream.write(toggl_constants.ENVFileTemplate)
 
