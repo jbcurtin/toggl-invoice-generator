@@ -1,0 +1,3 @@
+include toggl_invoice_generator/templates/*.html
+include README.md
+include LICENSE

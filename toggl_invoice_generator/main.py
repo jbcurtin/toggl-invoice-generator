@@ -3,6 +3,7 @@ import aiofiles
 import argparse
 import asyncio
 import enum
+import pkg_resources
 import jinja2
 import json
 import logging
@@ -60,7 +61,7 @@ async def extract_datums(url: str, session: aiohttp.ClientSession) -> typing.Dic
     async with session.get(url) as response:
       result = await response.text()
       if not response.status in [200]:
-        raise NotImplementedError(response.status)
+        raise NotImplementedError(f'HTTPResponse Status[{response.status}]')
 
       return json.loads(result)
 
@@ -120,11 +121,18 @@ def capture_options() -> typing.Any:
   parser.add_argument('-g', '--generate-env-file', default=False, action="store_true", dest="gen_envfile")
   return parser.parse_args()
 
-async def render(time_entries: typing.Dict[str, typing.Any], billing_total: str, template_path: str) -> None:
+async def load_template(template_path: str) -> str:
+  # template_path = os.path.join(os.path.dirname(__file__), 'templates/invoice.html')
+  return pkg_resources.resource_string(__name__, template_path)
+
+async def render(time_entries: typing.Dict[str, typing.Any], billing_total: str) -> None:
   # from pyppeteer import launch
   browser = await pyppeteer.launch()
   page = await browser.newPage()
-  template = JINJA2_ENV.get_template('templates/invoice.html')
+  template_path = 'templates/invoice.html'
+  logger.info(f'Using template[{template_path}]')
+  template_string = await load_template(template_path)
+  template = JINJA2_ENV.from_string(template_string.decode('utf-8'))
   template_context = {
     'billing_total': billing_total,
     'created_date': datetime.utcnow().strftime(INVOICE_FORMAT),
@@ -177,9 +185,9 @@ async def main(options: typing.Any) -> None:
     billing_total = billing_total + billing
 
   billing_total = '${:20,.2f}'.format(billing_total)
-  await render(time_entries, billing_total, 'templates/impekable.html')
+  await render(time_entries, billing_total)
 
-if __name__ in ['__main__']:
+def run() -> None:
   configure_jinja()
   asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
   options = capture_options()
@@ -194,4 +202,7 @@ if __name__ in ['__main__']:
 
   loop = _obtain_event_loop()
   loop.run_until_complete(main(options))
+
+if __name__ in ['__main__']:
+  run()
 

@@ -31,7 +31,7 @@ This will install the latest version of Toggl API Bill Generator which works on 
 INSTALL_REQUIRES = open('build-tools/requirements.txt', 'r').read()
 INSTALL_REQUIRES = [req for req in INSTALL_REQUIRES.split('\n') if req]
 setup(
-    name='Toggl API Bill Generator',
+    name='toggl-invoice-generator',
     python_requires='>={}.{}'.format(*REQUIRED_PYTHON),
     version='1.0.0',
     url='https://github.com/jbcurtin/toggl.com-bill-generator',
@@ -42,8 +42,9 @@ setup(
 the Command Line Interface. Following Flask App Factory Pattern and 12 Factor App best practices. All configuration
 can be accomplished through Environment Varibles.""",
     long_description=open('./README.md', 'r').read(),
-    scripts=['toggl_api_bill_generator/toggl-bill-gen'],
-    packages=['toggl_api_bill_generator'],
+    scripts=['toggl_invoice_generator/toggl-invoice-generator'],
+    packages=['toggl_invoice_generator'],
+    include_package_data=True,
     platforms='any',
     install_requires=INSTALL_REQUIRES,
     classifiers=[
