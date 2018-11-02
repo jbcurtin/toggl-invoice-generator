@@ -12,7 +12,7 @@ diligently throughout the month.
 ## Quickstart
 
 ```
-pip install toggl-bill-gen
+pip install toggl-api-bill-generator
 toggl-bill-gen -g
 source dev.sh
 toggl-bill-gen -o month
