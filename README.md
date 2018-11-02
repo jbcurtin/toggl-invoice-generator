@@ -12,7 +12,7 @@ diligently throughout the month.
 ## Quickstart
 
 ```
-pip install toggl-invoice-generator
+pip3 install toggl-invoice-generator
 toggl-invoice-generator -g
 source dev.sh
 toggl-invoice-generator -o month
