@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Invoice: {{invoice_number}} </title>
+  <style media="print">
+* {
+  -webkit-print-color-adjust: exact;
+  /*font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;*/
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  vertical-align: top;
+}
+body {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.service-table-header {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+table.main {
+  margin: 10px;
+}
+ul {
+  list-style-type: number;
+}
+li {
+  padding-left: 4px;
+}
+    </style>
+</head>
+
+<body>
+  <div>
+    <table class="main" border="1" cellpadding="3" cellspacing="0">
+      <tr>
+        <td colspan="2">
+          <table class="header-table">
+            <tr>
+              <td style="width:400px">
+                <h3 class="service-provider-header"> Service Provider </h3>
+                <span>
+                  {{ service_provider }} <br />
+                  {{ service_provider_address }} {{ service_provider_address_two }} <br/>
+                  {{ service_provider_city }}, {{ service_provider_state }}
+                  {{ service_provider_postal }} <br/>
+                </span>
+                <br />
+                <h3 class="service-provider-header"> Recipient </h3>
+                <p>
+                  <img src="{{logo_data_url}}" />
+                  <span>
+                    {{ recipient }} <br />
+                    {{ recipient_address }} {{ recipient_address_two }} <br />
+                    {{ recipient_city }}, {{ recipient_state }} {{ recipient_postal }} <br />
+                  </span>
+                </p>
+              </td>
+              <td style="width:50%;">
+                <h4 class="service-provider-header"> Issue Date </h4>
+                <span> {{ created_date }} </span>
+                <h4 class="service-provider-header"> Invoice No. </h4>
+                <span> {{ invoice_number }} </span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <table>
+            <tbody>
+              <tr class="service-table-header">
+                <th>
+                  Client
+                </th>
+                <th>
+                  Project
+                </th>
+                <th>
+                  Duration
+                </th>
+                <th>
+                  Desc
+                </th>
+                <th>
+                  Billing
+                </th>
+              </tr>
+              {% for entry in time_entries %}
+              <tr class="details">
+                <td style="min-width: 100px;">
+                  {{ entry.client.name }}
+                </td>
+                <td style="min-width: 100px;">
+                  {{ entry.project.name }}
+                </td>
+                <td style="min-width: 100px;">
+                  {{ entry.duration_human }}
+                </td>
+                <td>
+                  <p style="word-wrap: break-word;">
+                    {{ entry.description }}
+                  </p>
+                </td>
+                <td style="min-width:100px">
+                  {{ entry.billing }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <table style="width:100%">
+            <tr class="heading">
+              <td>
+                SubTotal
+              </td>
+              <td style="width: 110px; text-align: left;">
+                {{ billing_total }}
+              </td>
+            </tr>
+            <tr class="heading">
+              <td>
+                Tax Rate
+              </td>
+              <td style="width: 110px; text-align: left;">
+                % 0.000
+              </td>
+            </tr>
+            <tr class="heading">
+              <td>
+                Tax
+              </td>
+              <td style="width: 110px; text-align: left;">
+                $ 0.00
+              </td>
+            </tr>
+            <tr class="heading">
+              <td>
+                Total
+              </td>
+              <td style="width: 110px; text-align: left;">
+                {{ billing_total }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <ul>
+            <li> Please pay invoice within {{fulfillment_delay}} days </li>
+            <li> Please include the invoice number on your check or EFT </li>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <br />
+  </div>
+</body>
+</html>
