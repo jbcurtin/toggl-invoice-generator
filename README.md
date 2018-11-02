@@ -3,7 +3,7 @@
 A script that will generate a PDF from Toggl.com API. Easy to automate from CRON or use from the Command Line Interface. Following Flask App Factory Pattern and 12 Factor App best practices. All configuration
 can be accomplished through Environment Variables.
 
-Having a script to automate generation of bills helps reduce time and imporve
+Having a script to automate generation of bills helps reduce time and improve
 efficiency in communication. Using this tool, you'll be able to send bills once
 a month without much thought as long as you continue to enter your hours
 diligently throughout the month.
